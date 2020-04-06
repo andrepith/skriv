@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 import { list } from "./skrivReducer";
-import { isModal } from "./modalReducer";
+import { isModal } from "./utilityReducer";
 
 export default combineReducers({ list, isModal });

@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Card, Form, Modal } from "components";
-import { updateTask } from "store/actions";
+import { updateTask, modalAction } from "store/actions";
 import "./styles.css";
 
-const Container = ({ list, updateTask }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Container = ({ list, updateTask, modalAction, isModal }) => {
   const [currentId, setCurrentID] = useState(undefined);
   const handleRemove = (id) => {
     updateTask(list.filter((item) => item.id !== id));
   };
   const handleEdit = (id) => {
     setCurrentID(id);
-    setIsOpen(true);
+    modalAction(true);
   };
   const onRequestClose = () => {
-    setIsOpen(false);
+    modalAction(false);
   };
   return (
     <div>
@@ -30,13 +29,13 @@ const Container = ({ list, updateTask }) => {
           />
         ))}
       </div>
-      <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
+      <Modal isOpen={isModal} onRequestClose={onRequestClose}>
         <Form action="edit" id={currentId} />
       </Modal>
     </div>
   );
 };
 
-const mapStateToProps = ({ list }) => ({ list });
+const mapStateToProps = ({ list, isModal }) => ({ list, isModal });
 
-export default connect(mapStateToProps, { updateTask })(Container);
+export default connect(mapStateToProps, { updateTask, modalAction })(Container);
