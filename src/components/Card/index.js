@@ -1,5 +1,6 @@
 import React from "react";
 import { MdDeleteForever, MdModeEdit } from "react-icons/md";
+import moment from "moment";
 
 import "./styles.css";
 
@@ -13,7 +14,7 @@ export default ({
       <div className="card__header">
         <div>
           <h2 className="card__title">{title}</h2>
-          <time className="card__date">{date}</time>
+          <time className="card__date">{moment(date).format("llll")}</time>
         </div>
         <div className="card__more">
           <MdDeleteForever
