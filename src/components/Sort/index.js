@@ -8,11 +8,14 @@ const Sort = ({ utilityAction, utility }) => {
   };
 
   return (
-    <select defaultValue={utility.sort} onChange={handleChange}>
-      <option value="title">Title</option>
-      <option value="latest">Latest</option>
-      <option value="oldest">Oldest</option>
-    </select>
+    <div>
+      <label>Sort: </label>
+      <select defaultValue={utility.sort} onChange={handleChange}>
+        <option value="title">Title</option>
+        <option value="latest">Latest</option>
+        <option value="oldest">Oldest</option>
+      </select>
+    </div>
   );
 };
 

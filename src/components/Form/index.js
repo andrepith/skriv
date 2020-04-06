@@ -48,10 +48,11 @@ const CardForm = ({ updateTask, list, action, id, utilityAction, utility }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form style={{ textAlign: "left" }} onSubmit={handleSubmit}>
       <div>
-        <label>Title:</label>
+        <label className="d-block">Title:</label>
         <input
+          // style={{ width: "100%" }}
           type="text"
           maxLength="30"
           onChange={handleChange("title")}
@@ -59,8 +60,9 @@ const CardForm = ({ updateTask, list, action, id, utilityAction, utility }) => {
         ></input>
       </div>
       <div>
-        <label>Description:</label>
+        <label className="d-block">Description:</label>
         <textarea
+          style={{ minWidth: "300px", minHeight: "200px" }}
           maxLength="255"
           onChange={handleChange("desc")}
           value={desc}

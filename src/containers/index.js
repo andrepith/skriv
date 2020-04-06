@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { sortBy } from "lodash";
+import { AiOutlineFileAdd } from "react-icons/ai";
 import { Card, Form, Modal, Sort } from "components";
 import { updateTask, utilityAction } from "store/actions";
 import "./styles.css";
 
 const Container = ({ list, updateTask, utilityAction, utility }) => {
   const [currentId, setCurrentID] = useState(undefined);
+  const [add, setAdd] = useState(false);
   useEffect(() => {
     handleSort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,8 +37,19 @@ const Container = ({ list, updateTask, utilityAction, utility }) => {
   };
   return (
     <div>
-      <Form action="add" />
-      <Sort />
+      <div className="d-flex">
+        {add ? (
+          <Form action="add" />
+        ) : (
+          <div onClick={() => setAdd(true)}>
+            <label>Add Task: </label>{" "}
+            <AiOutlineFileAdd style={{ cursor: "pointer" }} />
+          </div>
+        )}
+        <div style={{ marginLeft: "32px" }}>
+          <Sort />
+        </div>
+      </div>
       <div className="wrapper-card">
         {list.map((item) => (
           <Card
