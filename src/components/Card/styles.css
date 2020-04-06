@@ -6,12 +6,26 @@
   max-width: 400px;
 }
 
+.card__header {
+  display: flex;
+}
+
 .card__title {
   font-size: medium;
 }
 
 .card__date {
   font-size: smaller;
+}
+
+.card__more {
+  flex: 1;
+  text-align: end;
+  font-size: x-large;
+}
+
+.card__icon {
+  cursor: pointer;
 }
 
 .card__description {
