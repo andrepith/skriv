@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { updateTask } from "store/actions";
 
-const CardForm = ({ updateTask, list }) => {
+const CardForm = ({ updateTask, list, action, id }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(undefined);
+
+  useEffect(() => {
+    if (action === "edit") {
+      const { title, desc } = list.find((item) => item.id === id);
+      setTitle(title);
+      setDesc(desc);
+      setCurrentIndex(list.findIndex((item) => item.id === id));
+    }
+  }, [action, id, list]);
+
   const handleChange = (name) => (e) => {
     e.preventDefault();
     const regex = /\d|[a-zA-Z]/;
@@ -20,9 +31,15 @@ const CardForm = ({ updateTask, list }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const date = Date.now();
-    const id = "id-" + date;
-    updateTask([...list, { id, title, desc, date }]);
+    if (action === "edit") {
+      list[currentIndex].title = title;
+      list[currentIndex].desc = desc;
+      updateTask(list);
+    } else {
+      const date = Date.now();
+      const id = "id-" + date;
+      updateTask([...list, { id, title, desc, date }]);
+    }
     setTitle("");
     setDesc("");
   };

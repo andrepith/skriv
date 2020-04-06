@@ -1,4 +1,5 @@
 import Card from "./Card";
-import CardForm from "./CardForm";
+import Form from "./Form";
+import Modal from "./Modal";
 
-export { Card, CardForm };
+export { Card, Form, Modal };

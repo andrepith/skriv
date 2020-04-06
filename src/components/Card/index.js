@@ -1,9 +1,13 @@
 import React from "react";
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdModeEdit } from "react-icons/md";
 
 import "./styles.css";
 
-export default ({ handleClick, data: { id, title, date, desc } }) => {
+export default ({
+  handleRemove,
+  handleEdit,
+  data: { id, title, date, desc },
+}) => {
   return (
     <div className="card">
       <div className="card__header">
@@ -14,8 +18,9 @@ export default ({ handleClick, data: { id, title, date, desc } }) => {
         <div className="card__more">
           <MdDeleteForever
             className="card__icon"
-            onClick={() => handleClick(id)}
+            onClick={() => handleRemove(id)}
           />
+          <MdModeEdit className="card__icon" onClick={() => handleEdit(id)} />
         </div>
       </div>
       <p className="card__body">{desc}</p>
