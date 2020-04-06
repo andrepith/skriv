@@ -1,2 +1,2 @@
 export { updateTask } from "./skrivAction";
-export { modalAction } from "./utilityAction";
+export { utilityAction } from "./utilityAction";

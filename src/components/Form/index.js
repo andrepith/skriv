@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { uniqBy } from "lodash";
-import { updateTask, modalAction } from "store/actions";
+import { updateTask, utilityAction } from "store/actions";
 
-const CardForm = ({ updateTask, list, action, id, modalAction }) => {
+const CardForm = ({ updateTask, list, action, id, utilityAction, utility }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [currentIndex, setCurrentIndex] = useState(undefined);
@@ -37,7 +37,7 @@ const CardForm = ({ updateTask, list, action, id, modalAction }) => {
       temp[currentIndex].title = title;
       temp[currentIndex].desc = desc;
       updateTask(uniqBy([...list, ...temp], "id"));
-      modalAction(false);
+      utilityAction({ ...utility, isModal: false });
     } else {
       const date = Date.now();
       const id = "id-" + date;
@@ -71,6 +71,8 @@ const CardForm = ({ updateTask, list, action, id, modalAction }) => {
   );
 };
 
-const mapStateToProps = ({ list }) => ({ list });
+const mapStateToProps = ({ list, utility }) => ({ list, utility });
 
-export default connect(mapStateToProps, { updateTask, modalAction })(CardForm);
+export default connect(mapStateToProps, { updateTask, utilityAction })(
+  CardForm
+);

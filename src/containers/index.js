@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Card, Form, Modal } from "components";
-import { updateTask, modalAction } from "store/actions";
+import { updateTask, utilityAction } from "store/actions";
 import "./styles.css";
 
-const Container = ({ list, updateTask, modalAction, isModal }) => {
+const Container = ({ list, updateTask, utilityAction, utility }) => {
   const [currentId, setCurrentID] = useState(undefined);
   const handleRemove = (id) => {
     updateTask(list.filter((item) => item.id !== id));
   };
   const handleEdit = (id) => {
     setCurrentID(id);
-    modalAction(true);
+    utilityAction({ ...utility, isModal: true });
   };
   const onRequestClose = () => {
-    modalAction(false);
+    utilityAction({ ...utility, isModal: false });
   };
   return (
     <div>
@@ -29,13 +29,15 @@ const Container = ({ list, updateTask, modalAction, isModal }) => {
           />
         ))}
       </div>
-      <Modal isOpen={isModal} onRequestClose={onRequestClose}>
+      <Modal isOpen={utility.isModal} onRequestClose={onRequestClose}>
         <Form action="edit" id={currentId} />
       </Modal>
     </div>
   );
 };
 
-const mapStateToProps = ({ list, isModal }) => ({ list, isModal });
+const mapStateToProps = ({ list, utility }) => ({ list, utility });
 
-export default connect(mapStateToProps, { updateTask, modalAction })(Container);
+export default connect(mapStateToProps, { updateTask, utilityAction })(
+  Container
+);

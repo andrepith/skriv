@@ -1,8 +1,8 @@
-import { MODAL } from "store/types";
+import { UTILITY } from "store/types";
 
-export const isModal = (state = false, { type, payload }) => {
+export const utility = (state = {}, { type, payload }) => {
   switch (type) {
-    case MODAL:
+    case UTILITY:
       return payload;
     default:
       return state;

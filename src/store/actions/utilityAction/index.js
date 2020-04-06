@@ -1,8 +1,8 @@
-import { MODAL } from "store/types";
+import { UTILITY } from "store/types";
 
-export const modalAction = (payload) => (dispatch) => {
+export const utilityAction = (payload) => (dispatch) => {
   dispatch({
-    type: MODAL,
+    type: UTILITY,
     payload,
   });
 };
