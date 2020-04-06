@@ -1,0 +1,19 @@
+.card {
+  text-align: left;
+  border: solid 1px #555;
+  border-radius: 8px;
+  padding: 8px;
+  max-width: 400px;
+}
+
+.card__title {
+  font-size: medium;
+}
+
+.card__date {
+  font-size: smaller;
+}
+
+.card__description {
+  font-size: small;
+}
