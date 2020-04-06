@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { uniqBy } from "lodash";
 import { updateTask, modalAction } from "store/actions";
 
 const CardForm = ({ updateTask, list, action, id, modalAction }) => {
@@ -32,9 +33,10 @@ const CardForm = ({ updateTask, list, action, id, modalAction }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (action === "edit") {
-      list[currentIndex].title = title;
-      list[currentIndex].desc = desc;
-      updateTask(list);
+      let temp = list;
+      temp[currentIndex].title = title;
+      temp[currentIndex].desc = desc;
+      updateTask(uniqBy([...list, ...temp], "id"));
       modalAction(false);
     } else {
       const date = Date.now();
